@@ -8,16 +8,9 @@ import net.zihui.csprojmod.init.ItemsInit;
 import net.zihui.csprojmod.init.ModCreativeTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-
-
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod(CSProjMain.MOD_ID)
 public class CSProjMain {
@@ -35,6 +28,10 @@ public class CSProjMain {
 
         // Calls to ItemsInit to register the items within there
         ItemsInit.ITEMS.register(modEventBus);
+        // Register first item into mod tab
+
+
+
 
         MinecraftForge.EVENT_BUS.register(this);
     }
