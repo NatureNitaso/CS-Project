@@ -13,6 +13,12 @@ public class ModCreativeTab extends CreativeModeTab {
     public ModCreativeTab(int index, String label) {
         super(index, label);
     }
+    // Creates a modded tab for items of my mod
+    public static final ModCreativeTab TAB_MODDED = new ModCreativeTab(CreativeModeTab.TABS.length, "csprojmod");
+
+
+
+
 
 
 

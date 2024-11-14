@@ -17,7 +17,6 @@ public class CSProjMain {
 
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "csprojmod";
-    public static final ModCreativeTab instance = new ModCreativeTab(CreativeModeTab.TABS.length, "csprojmod");
 
     public CSProjMain() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
