@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube.all",
+  "textures": {
+    "all": "csprojmod:block/test_block"
+  }
+}

@@ -12,12 +12,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.zihui.csprojmod.CSProjMain;
-import net.zihui.csprojmod.items.tempFuel;
 
-public class ItemsInit {
+public class ModItems {
     // Sets up register for deferred register method
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, CSProjMain.MOD_ID);
+
+
     // Register first item
     public static final RegistryObject<Item> TESTOBJ = ITEMS.register("testobj",
             () -> new Item(new Item.Properties().tab(ModCreativeTab.TAB_MODDED)));
@@ -28,12 +29,12 @@ public class ItemsInit {
                     .food(new FoodProperties.Builder().nutrition(10)
                             .saturationMod(1).effect
                                     (() -> new MobEffectInstance
-                                            (MobEffects.DAMAGE_BOOST, 1200, 3), 1F)
-                            .build()))); // Initiates the process of making this item
+                                            (MobEffects.DAMAGE_BOOST, 1200, 3), 1F).
+                            effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 1500, 2),1F).
+                            effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1500, 3),1F).build()))); // Initiates the process of making this item
 
-    // Initiates tempFuel
-    public static final RegistryObject<Item> FUEL = ITEMS.register("fuel",
-            () -> new tempFuel(new Item.Properties().tab(ModCreativeTab.TAB_MODDED)));
+
+
 
 
     // Registers all items in the Deferred Register to the Forge directory

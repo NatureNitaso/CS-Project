@@ -1,5 +1,6 @@
 {
+  "item.csprojmod.crack": "Crack",
+  "item.csprojmod.testobj": "Test Object",
   "itemGroup.csprojmod": "CS Mod Items",
-
-  "item.csprojmod.testobj": "Test Object"
+  "block.csprojmod.test_block": "Test Block"
 }
