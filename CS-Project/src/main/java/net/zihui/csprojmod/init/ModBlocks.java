@@ -21,14 +21,14 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, CSProjMain.MOD_ID);
 
     // Initiates first block obj
-    public static final RegistryObject<Block> TEST_BLOCK = registryBlock("test_block",
+    public static final RegistryObject<Block> TEST_BLOCK = registryBlock("testblock",
             () -> new Block(BlockBehaviour.Properties.of(Material.CACTUS)
                     .strength(6F).requiresCorrectToolForDrops()), ModCreativeTab.TAB_MODDED);
-    public static final RegistryObject<Block> TEST_DROP = registryBlock("test_drop",
+    public static final RegistryObject<Block> TEST_DROP = registryBlock("testdrop",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.CACTUS)
                     .strength(6F).requiresCorrectToolForDrops(), UniformInt.of(10, 100))
             , ModCreativeTab.TAB_MODDED);
-    public static final RegistryObject<Block> TEST_DRIP = registryBlock("test_drip",
+    public static final RegistryObject<Block> TEST_DRIP = registryBlock("testdrip",
             () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.CACTUS)
                     .strength(6F).requiresCorrectToolForDrops(), UniformInt.of(10, 1000))
             , ModCreativeTab.TAB_MODDED);
