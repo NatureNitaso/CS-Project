@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.zihui.csprojmod.CSProjMain;
+import net.zihui.csprojmod.items.KnightSword;
 
 public class ModItems {
     // Sets up register for deferred register method
@@ -33,7 +34,8 @@ public class ModItems {
                             effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 1500, 2),1F).
                             effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1500, 3),1F).build()))); // Initiates the process of making this item
 
-
+    public static final RegistryObject<Item> kNIGHTSWORD = ITEMS.register("knightsword",
+            () -> new KnightSword(new Item.Properties().tab(ModCreativeTab.TAB_MODDED)));
 
 
 
