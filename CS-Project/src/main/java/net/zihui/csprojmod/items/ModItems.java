@@ -1,4 +1,4 @@
-package net.zihui.csprojmod.init;
+package net.zihui.csprojmod.items;
 
 
 // This is where we register all of our items into the game
@@ -12,7 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.zihui.csprojmod.CSProjMain;
-import net.zihui.csprojmod.items.KnightSword;
+import net.zihui.csprojmod.init.ModCreativeTab;
 
 public class ModItems {
     // Sets up register for deferred register method
@@ -35,7 +35,7 @@ public class ModItems {
                             effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 1500, 3),1F).build()))); // Initiates the process of making this item
 
     public static final RegistryObject<Item> kNIGHTSWORD = ITEMS.register("knightsword",
-            () -> new KnightSword(new Item.Properties().tab(ModCreativeTab.TAB_MODDED)));
+            () -> new KnightSword(new Item.Properties().durability(119), ModCreativeTab.TAB_MODDED));
 
 
 

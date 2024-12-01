@@ -3,7 +3,7 @@ package net.zihui.csprojmod;
 // imports up here //
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.zihui.csprojmod.init.ModItems;
+import net.zihui.csprojmod.items.ModItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Mod;
