@@ -119,17 +119,13 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
     maven {
-        url 'https://files.minecraftforge.net/maven/'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
     }
     mavenCentral() // If you need other dependencies from Maven Central
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
     // flatDir {
     //     dir 'libs'
     // }
-    geckoLib {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-    }
 }
 
 dependencies {
