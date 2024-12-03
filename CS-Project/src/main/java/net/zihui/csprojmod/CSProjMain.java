@@ -3,6 +3,7 @@ package net.zihui.csprojmod;
 // imports up here //
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.zihui.csprojmod.blocks.ModBlocks;
 import net.zihui.csprojmod.items.ModItems;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +27,7 @@ public class CSProjMain {
         // Calls to ModItems to register the items within there
         ModItems.ITEMS.register(modEventBus);
         // Calls to ModBlocks to register the blocks made there
-
+        ModBlocks.BLOCKS.register(modEventBus);
 
 
         MinecraftForge.EVENT_BUS.register(this);
