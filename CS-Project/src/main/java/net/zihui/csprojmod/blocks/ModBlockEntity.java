@@ -9,11 +9,11 @@ import net.zihui.csprojmod.CSProjMain;
 import net.zihui.csprojmod.blocks.entity.SummonPedestalBlockEntity;
 
 public class ModBlockEntity {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPEs =
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CSProjMain.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<SummonPedestalBlockEntity>>
-            SUMMON_PEDESTAL_BLOCK_ENTITY = BLOCK_ENTITY_TYPEs.register("summon_pedestal_block_entity",
+            SUMMON_PEDESTAL_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register("summon_pedestal_block_entity",
             () -> BlockEntityType.Builder.of(SummonPedestalBlockEntity:: new, ModBlocks.SUMMON_PEDESTAL.get())
                     .build(null));
 }

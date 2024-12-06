@@ -29,7 +29,7 @@ public class CSProjMain {
         ModItems.ITEMS.register(modEventBus);
         // Calls to ModBlocks to register the blocks made there
         ModBlocks.BLOCKS.register(modEventBus);
-        ModBlockEntity.BLOCK_ENTITY_TYPEs.register(modEventBus);
+        ModBlockEntity.BLOCK_ENTITY_TYPES.register(modEventBus);
 
 
         MinecraftForge.EVENT_BUS.register(this);
