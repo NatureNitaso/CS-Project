@@ -6,50 +6,58 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.ItemStackHandler;
+import net.zihui.csprojmod.blocks.ModBlockEntity;
+import net.zihui.csprojmod.blocks.entity.SummonPedestalBlockEntity;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SummonPedestal extends Block {
     public static Items summon;
 
+    // Defines the shape of the block
+    private static final VoxelShape SHAPE = Shapes.box(0.2, 0, 0.2, 0.8, 1, 0.8);
+
     public SummonPedestal(Block.Properties properties) {
         super(properties);
     }
-    // Overrides the interaction result method (what happens upon interacting
+
+    // Block Entity BELOW
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SummonPedestalBlockEntity(pos, state);
+    }
 
     @Override
-    public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        // Makes a variable that identifies the held item of the player interacting with the block
-        ItemStack held = player.getItemInHand(hand);
-        int index = player.getItemInHand(hand).getCount();
+    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext collision){
+        return SHAPE;
+    }
 
-        // Checks to see if item matchs with it's requirements. 1. is running on server ride
-        // 2. held item is equal to summon item
-        // 3.
-        if (!level.isClientSide() && held.getItem() == Items.HEART_OF_THE_SEA){
-            player.getItemInHand(hand).setCount(index - 1); //Takes away 1 item upon consumption
-            level.explode(player, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.BlockInteraction.NONE);
-            return InteractionResult.CONSUME;
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+        if (blockEntity instanceof SummonPedestalBlockEntity pedestal) {
+            return pedestal.use(player, hand);
         }
-
-
-        return super.use(state, level, pos, player, hand, hit);
+        return InteractionResult.PASS;
     }
 
 
-    // Block Entity BELOW
-//    @Override
-//    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-//        return null;
-//    }
+
+
 
 }

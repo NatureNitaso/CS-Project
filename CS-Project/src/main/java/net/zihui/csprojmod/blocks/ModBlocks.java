@@ -30,7 +30,7 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, CSProjMain.MOD_ID);
 
-    public static final RegistryObject<Block> SUMMON_FRAME = registerBlock("summon_pedestal",
+    public static final RegistryObject<Block> SUMMON_PEDESTAL = registerBlock("summon_pedestal",
             () -> new SummonPedestal(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), TAB_MODDED);
 
 
