@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.zihui.csprojmod.blocks.entity.SummonPedestalBlockEntity;
 
 public class SummonPedestal extends Block {
     public Items summon;
@@ -19,6 +20,15 @@ public class SummonPedestal extends Block {
 
     public SummonPedestal(Block.Properties properties) {
         super(properties);
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState p_49921_) {
+        return super.isRandomlyTicking(p_49921_);
+    }
+
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new SummonPedestalBlockEntity(pos, state);
     }
 
     // Overrides the interaction result method (what happens upon interacting)
