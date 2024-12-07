@@ -26,21 +26,21 @@ import java.awt.*;
 import java.util.Objects;
 
 public class SummonPedestalBlockEntity extends BlockEntity {
-    private ItemStack storedItem = ItemStack.EMPTY; // This determines the item that is store by this block
+    private ItemStack item = ItemStack.EMPTY; // This determines the item that is store by this block
 
     public SummonPedestalBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntity.SUMMON_PEDESTAL_BLOCK_ENTITY.get(), pos, state);
     }
 
     // This sets the stored item within the block to whatever parameter is passed
-    public void setStoredItem(ItemStack item) {
-        this.storedItem = item;
+    public void setItem(ItemStack item) {
+        this.item = item;
         this.setChanged();
     }
 
     // Gets stored item
     public ItemStack getStoredItem() {
-        return storedItem;
+        return item;
     }
 
 //    // Tells about player's interaction with block

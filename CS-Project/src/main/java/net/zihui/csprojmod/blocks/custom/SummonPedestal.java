@@ -4,71 +4,54 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShearsItem;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import net.zihui.csprojmod.blocks.entity.SummonPedestalBlockEntity;
 
 public class SummonPedestal extends Block {
-    public static Items summon;
-    public static ItemStack item;
-
-    // Defines the shape of the block
-    private static final VoxelShape SHAPE = Shapes.box(0.2, 0, 0.2, 0.8, 1, 0.8);
+    public Items summon;
+    public ItemStack storedItem = ItemStack.EMPTY;
 
     public SummonPedestal(Block.Properties properties) {
         super(properties);
     }
 
-    // Block Entity BELOW
-    public BlockEntity newBlockEntity (BlockPos pos, BlockState state) {
-        return new SummonPedestalBlockEntity(pos, state);
-    }
-
+    // Overrides the interaction result method (what happens upon interacting)
     @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext collision){
-        return SHAPE;
-    }
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        // Makes a variable that identifies the held item of the player interacting with the block
+        ItemStack held = player.getItemInHand(hand);
+        // Grabs the # of items
+        int index = player.getItemInHand(hand).getCount();
 
-    // Tells about player's interaction with block
-    public InteractionResult use(Player player, InteractionHand hand) {
-        // Checks to see if not player is running on Client side
-        if (!player.level.isClientSide()){
-            if (true){
-                // Identifies the item in player's hand
-                ItemStack held = player.getItemInHand(hand);
-                // Checks to see if there's item in hand
-                if (held != ItemStack.EMPTY){
-                    player.getItemInHand(hand).split(1);
-                    System.out.println("It works!");
-                    item = held;
-                    return InteractionResult.SUCCESS;
-                }
-            } else {
-                // Returns stored item back to player
-                player.getInventory().add(item);
-                System.out.println("It gone!");
-                return InteractionResult.SUCCESS;
-            }
+        BlockEntity be = level.getBlockEntity(pos);
+        // Checks to see if item matchs with it's requirements. 1. is running on server ride
+        // 2. held item is equal to summon item
+        // 3.
+        if (!level.isClientSide() && held.getItem() == Items.HEART_OF_THE_SEA) {
+            player.getItemInHand(hand).setCount(index - 1); //Takes away 1 item upon consumption
+            level.explode(player, pos.getX(), pos.getY(), pos.getZ(), 4.0F, true, Explosion.BlockInteraction.NONE);
+            return InteractionResult.CONSUME;
+        } else {
+
+            player.getItemInHand(hand).setCount(index - 1);
+            storedItem = player.getItemInHand(hand);
+            be.saveToItem(storedItem);
+            return InteractionResult.CONSUME;
         }
-        return InteractionResult.SUCCESS;
+
+
     }
-
-
-
-
-
 }
+
+
+    // Block Entity BELOW
+//    @Override
+//    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+//        return null;
+//    }
