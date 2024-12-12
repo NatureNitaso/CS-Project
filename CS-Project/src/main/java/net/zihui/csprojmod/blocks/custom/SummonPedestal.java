@@ -5,6 +5,7 @@ import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.commands.SummonCommand;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -22,16 +23,19 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.event.level.NoteBlockEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.items.ItemStackHandler;
 import net.zihui.csprojmod.blocks.entity.SummonPedestalBlockEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.Text;
 
 public class SummonPedestal extends BaseEntityBlock {
-    public Items summon;
+    public Items summons;
+    public ItemStack stored;
 
     public SummonPedestal(Block.Properties properties) {
         super(properties);
+        stored = ItemStack.EMPTY;
     }
 
 
@@ -45,17 +49,52 @@ public class SummonPedestal extends BaseEntityBlock {
             if (held.getItem() == Items.HEART_OF_THE_SEA) {
                 index -= 1;
                 player.getItemInHand(hand).setCount(index);
+                setStoredItem(held, player, hand);
                 return InteractionResult.SUCCESS;
             } else {
                 index -= 1;
                 player.getItemInHand(hand).setCount(index);
+                setStoredItem(held, player, hand);
                 return InteractionResult.SUCCESS;
 
             }
-            return InteractionResult.FAIL;
         }
         return InteractionResult.FAIL;
     }
+
+    // Method to storeItem
+    public void setStoredItem(ItemStack item, Player player, InteractionHand hand) {
+        int index = player.getItemInHand(hand).getCount();
+        player.getItemInHand(hand).setCount(index);
+        stored = item;
+    }
+
+    // Method to return item to player
+    public void returnStoredItem(ItemStack item, Player player) {
+        player.getInventory().add(stored);
+        stored = ItemStack.EMPTY;
+    }
+
+    // Method for itemStored
+
+    public ItemStack manageStoredItem(BlockPos pos, Level level, BlockState state, Player player, InteractionHand hand) {
+        boolean isStoredEmpty = (stored == ItemStack.EMPTY); // Checks to see if stored == empty
+        boolean isHandEmpty = (player.getItemInHand(hand) != ItemStack.EMPTY); // Checks to see if hand is empty
+
+        if (isHandEmpty && isStoredEmpty){
+            return ItemStack.EMPTY;
+        }
+        else if (!isHandEmpty && isStoredEmpty) {
+            returnStoredItem(stored, player);
+        }
+
+
+        return stored;
+    }
+
+
+
+    /* BLOCK ENTITY */
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
