@@ -59,7 +59,7 @@ public class SummonPedestal extends BaseEntityBlock {
                 return InteractionResult.SUCCESS;
             }
         } else {
-            returnStoredItem(level, pos, state);
+            returnStoredItem(level, player, pos);
             return InteractionResult.SUCCESS;
         }
     }
@@ -67,18 +67,27 @@ public class SummonPedestal extends BaseEntityBlock {
     // Method to storeItem
     public void setStoredItem(ItemStack item, Player player, InteractionHand hand) {
         int index = player.getItemInHand(hand).getCount();
-        player.getItemInHand(hand).setCount(index);
         stored = item;
+        player.getItemInHand(hand).setCount(index);
     }
 
     // Method that drops the item at the block pos in the world
-    public void returnStoredItem(Level level, BlockPos pos, BlockState state) {
-        if (!level.isClientSide) {
-            ItemEntity storedItemEntity = new ItemEntity(level, pos.getX(), pos.getY(),
-                    pos.getZ(), stored); // Makes new item entity based on what is stored within the obj
-            level.addFreshEntity(storedItemEntity); // Drops the entity of the item stored within the obj
-            stored = ItemStack.EMPTY; // Set stored obj variable back to empty
+    public void returnStoredItem(Level level, Player player, BlockPos pos) {
+        if (!level.isClientSide && stored != ItemStack.EMPTY) {
+            ItemEntity storedItemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stored);
+            level.addFreshEntity(storedItemEntity);
+            stored = ItemStack.EMPTY;
         }
+    }
+
+    // Method checks player inventory before giving item
+    public int inInventory(Player player, ItemStack item) {
+        int count = 0;
+
+
+
+
+        return count;
     }
 
     // Method for itemStored
