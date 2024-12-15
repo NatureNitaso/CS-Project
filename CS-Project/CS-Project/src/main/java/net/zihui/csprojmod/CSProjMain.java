@@ -1,13 +1,13 @@
 package net.zihui.csprojmod;
 
 // imports up here //
+import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.zihui.csprojmod.blocks.ModBlockEntity;
 import net.zihui.csprojmod.blocks.ModBlocks;
 import net.zihui.csprojmod.items.ModItems;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -15,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(CSProjMain.MOD_ID)
 public class CSProjMain {
 
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "csprojmod";
 
     public CSProjMain() {
