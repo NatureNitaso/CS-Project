@@ -4,9 +4,7 @@ package net.zihui.csprojmod;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.zihui.csprojmod.blocks.ModBlockEntity;
 import net.zihui.csprojmod.blocks.ModBlocks;
-import net.zihui.csprojmod.init.ModCreativeTab;
 import net.zihui.csprojmod.items.ModItems;
 import org.slf4j.Logger;
 import net.minecraftforge.fml.common.Mod;
@@ -32,8 +30,6 @@ public class CSProjMain {
         ModItems.ITEMS.register(modEventBus);
         // Calls to ModBlocks to register the blocks made there
         ModBlocks.BLOCKS.register(modEventBus);
-        ModBlockEntity.BLOCK_ENTITY_TYPES.register(modEventBus);
-
 
         MinecraftForge.EVENT_BUS.register(this);
     }
