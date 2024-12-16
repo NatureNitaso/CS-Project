@@ -6,6 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.zihui.csprojmod.blocks.ModBlockEntity;
 import net.zihui.csprojmod.blocks.ModBlocks;
+import net.zihui.csprojmod.init.ModCreativeTab;
 import net.zihui.csprojmod.items.ModItems;
 import org.slf4j.Logger;
 import net.minecraftforge.fml.common.Mod;
@@ -22,6 +23,8 @@ public class CSProjMain {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::setup);
+
+
 
 
 

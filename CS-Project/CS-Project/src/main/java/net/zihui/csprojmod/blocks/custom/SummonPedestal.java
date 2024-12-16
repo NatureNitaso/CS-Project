@@ -1,6 +1,7 @@
 package net.zihui.csprojmod.blocks.custom;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -16,6 +17,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class SummonPedestal extends BaseEntityBlock {
     public Items summons;
     public ItemStack stored;
@@ -26,26 +29,23 @@ public class SummonPedestal extends BaseEntityBlock {
         super(properties);
         stored = ItemStack.EMPTY;
         itemHeld = ItemStack.EMPTY;
-        storedEntity = (Entity) Entity.NULL;
+//        storedEntity = (Entity) Entity.NULL;
     }
 
 
     @Override
     public @NotNull InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         itemHeld = player.getItemInHand(hand); // grabs item that's in the players hand upon interaction
-        int index = itemHeld.getCount(); // Gets the # of items held in player's hand
 
         // Checks to see if this behavior is on the client or server side
         if (!level.isClientSide() && stored == ItemStack.EMPTY) {
             if (itemHeld.getItem() == Items.HEART_OF_THE_SEA) {
-                index -= 1;
-                player.getItemInHand(hand).setCount(index);
-                setStoredItem(itemHeld, player, hand);
+                itemHeld.split(1);
+                setStoredItem(itemHeld.getTag(), player, hand);
                 return InteractionResult.SUCCESS;
             } else {
-                index -= 1;
-                player.getItemInHand(hand).setCount(index);
-                setStoredItem(itemHeld, player, hand);
+                itemHeld.split(1);
+                setStoredItem(itemHeld.getTag(), player, hand);
                 return InteractionResult.SUCCESS;
             }
         } else {
@@ -55,17 +55,19 @@ public class SummonPedestal extends BaseEntityBlock {
     }
 
     // Method to storeItem
-    public void setStoredItem(ItemStack item, Player player, InteractionHand hand) {
-        stored = item;
-        storedEntity = item.getEntityRepresentation();
+    public void setStoredItem(CompoundTag tag, Player player, InteractionHand hand) {
+        stored = itemHeld;
+        stored.save(tag);
+//        storedEntity = item.getEntityRepresentation();
     }
 
     // Method that drops the item at the block pos in the world
     public void returnStoredItem(Level level, Player player, BlockPos pos) {
         if (!level.isClientSide && stored != ItemStack.EMPTY) {
-            level.addFreshEntity(storedEntity);
+//            level.addFreshEntity();
+            level.addFreshEntity(Objects.requireNonNull(stored.getItem().createEntity(level, player, stored)));
             stored = ItemStack.EMPTY;
-            storedEntity = (Entity) Entity.NULL;
+//            storedEntity = (Entity) Entity.NULL;
         }
     }
 
