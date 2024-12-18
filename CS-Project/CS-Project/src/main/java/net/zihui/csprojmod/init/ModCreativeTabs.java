@@ -21,7 +21,7 @@ public class ModCreativeTabs {
     public static void registerCreativeModeTabs(CreativeModeTabEvent.Register event) {
         CSPROJ_MOD = event.registerCreativeModeTab(new ResourceLocation(CSProjMain.MOD_ID, "csprojmod_tab"),
                 builder -> builder.icon(() -> new ItemStack(ModItems.CRACK.get()))
-                        .title(Component.translatable("creativemodetab.csproj_mod")));
+                        .title(Component.translatable("creativemodetab.csprojmod_tab")));
     }
 }
 

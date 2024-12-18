@@ -34,6 +34,7 @@ public class CSProjMain {
         ModItems.ITEMS.register(modEventBus);
         // Calls to ModBlocks to register the blocks made there
 //        ModBlocks.BLOCKS.register(modEventBus);
+        modEventBus.addListener(this::addCreative);
 
 
     }
