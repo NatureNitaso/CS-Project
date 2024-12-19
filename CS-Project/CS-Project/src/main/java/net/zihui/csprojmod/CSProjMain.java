@@ -2,13 +2,15 @@ package net.zihui.csprojmod;
 
 // imports up here //
 import com.mojang.logging.LogUtils;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.zihui.csprojmod.entity.ModEntities;
+import net.zihui.csprojmod.entity.client.TigerRenderer;
 import net.zihui.csprojmod.init.ModCreativeTabs;
 import net.zihui.csprojmod.items.ModItems;
 import org.slf4j.Logger;
@@ -48,6 +50,7 @@ public class CSProjMain {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            EntityRenderers.register(ModEntities.TIGER.get(), TigerRenderer::new);
 
 
         }
@@ -57,7 +60,6 @@ public class CSProjMain {
         if (event.getTab() == ModCreativeTabs.CSPROJ_MOD) {
             event.accept(ModItems.CRACK);
             event.accept(ModItems.TESTOBJ);
-
 
 
         }

@@ -66,6 +66,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="[1.19.3,1.20)"
+<<<<<<< Updated upstream
     ordering="NONE"
     side="BOTH"
 # Here's another dependency
@@ -74,5 +75,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis lacinia magn
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="[4.1.2,)"
+=======
+>>>>>>> Stashed changes
     ordering="NONE"
     side="BOTH"
+[[dependencies.csprojmod]]
+modId="geckolib3"
+mandatory=true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+versionRange="[4.1.2,)"
+ordering="NONE"
+side="BOTH"
